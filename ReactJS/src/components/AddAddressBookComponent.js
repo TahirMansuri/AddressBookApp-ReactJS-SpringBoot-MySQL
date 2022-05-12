@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 
+import AddressBookService from '../service/AddressBookService'
+
 const AddAddressBookComponent = () => {
 
     const [name, setName] = useState('')
@@ -15,6 +17,14 @@ const AddAddressBookComponent = () => {
     const saveOrUpdateBook = (e) => {
         e.preventDefault();
         console.log(name+"\n"+address+"\n"+city+"\n"+state+"\n"+zip+"\n"+phone);
+
+        const contact = {name,address,city,state,zip,phone};
+
+        AddressBookService.addContact(contact).then((response)=>{
+            console.log(response.data);
+        }).catch(error=>{
+            console.log(error);
+        });
     }
     
 
