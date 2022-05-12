@@ -24,6 +24,16 @@ const ViewAddressBookComponent = () => {
     });
   }
 
+  const deleteContactById = (id) => {
+        AddressBookService.deleteContactById(id).then((response)=>{
+            console.log(response);
+            console.log("Contact Deleted.");
+            getAllContacts();
+        }).catch(error=>{
+            console.log(error);
+        });
+  }
+
   return (
     <div>
          <div class="form-content">
@@ -61,8 +71,8 @@ const ViewAddressBookComponent = () => {
                         <td> {contact.zip} </td>
                         <td> {contact.phone} </td>
                         <td>
-                                <img src={delete1} alt="delete" />
-                                <img src={update1} alt="edit" />
+                                <img src={delete1} alt="delete" onClick={() => deleteContactById(contact.id)}/>
+                                <Link to={`/${contact.id}`}><img src={update1} alt="edit" /></Link>
                         </td>
                         </tr>        
                     )
