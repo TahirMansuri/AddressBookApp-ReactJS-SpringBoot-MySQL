@@ -1,6 +1,7 @@
 package com.infogalaxy.addressbookapp.service;
 
 import com.infogalaxy.addressbookapp.dto.ContactDTO;
+import com.infogalaxy.addressbookapp.exception.ResourceNotFoundException;
 import com.infogalaxy.addressbookapp.model.ContactData;
 import com.infogalaxy.addressbookapp.repository.AddressBookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,12 @@ public class AddressBookServiceImpl implements IAddressBookService{
     @Override
     public List<ContactData> getAllContacts() {
         return addressBookRepo.findAll();
+    }
+
+    @Override
+    public void deleteBookById(int id) {
+        ContactData contactData = addressBookRepo.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Contact with Given ID Not Found"));
+        addressBookRepo.delete(contactData);
     }
 }
