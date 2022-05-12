@@ -32,4 +32,11 @@ public class AddressBookServiceImpl implements IAddressBookService{
                     .orElseThrow(() -> new ResourceNotFoundException("Contact with Given ID Not Found"));
         addressBookRepo.delete(contactData);
     }
+
+    @Override
+    public ContactData getContactById(int id) {
+        ContactData contactData = addressBookRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Contact with Given ID Not Found"));
+        return contactData;
+    }
 }
