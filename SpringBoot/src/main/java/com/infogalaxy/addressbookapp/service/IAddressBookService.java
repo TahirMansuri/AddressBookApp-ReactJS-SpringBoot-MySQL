@@ -11,4 +11,6 @@ public interface IAddressBookService {
 
     List<ContactData> getAllContacts();
 
+    void deleteContactById(int i);
+
 }

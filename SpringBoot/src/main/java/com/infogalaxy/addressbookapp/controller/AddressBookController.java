@@ -42,4 +42,13 @@ public class AddressBookController {
     public ResponseEntity<List<ContactData>> getAllContacts() {
         return new ResponseEntity<List<ContactData>>(addressBookService.getAllContacts(),HttpStatus.OK);
     }
+
+    /***
+     *
+     * @param id
+     */
+    @PutMapping("/deleteContactById/{id}")
+    public void deleteContactById(@PathVariable int id){
+        addressBookService.deleteContactById(id);
+    }
 }
