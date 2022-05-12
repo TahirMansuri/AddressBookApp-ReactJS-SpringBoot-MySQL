@@ -27,7 +27,7 @@ public class AddressBookServiceImpl implements IAddressBookService{
     }
 
     @Override
-    public void deleteBookById(int id) {
+    public void deleteContactById(int id) {
         ContactData contactData = addressBookRepo.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Contact with Given ID Not Found"));
         addressBookRepo.delete(contactData);
