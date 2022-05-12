@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 import AddressBookService from '../service/AddressBookService'
-
+import { useNavigate, useParams } from 'react-router-dom';
 const AddAddressBookComponent = () => {
 
     const [name, setName] = useState('')
@@ -14,6 +14,8 @@ const AddAddressBookComponent = () => {
     const getCity = (e) => setCity(e.target.value);
     const getState = (e) => setState(e.target.value);
 
+    const navigate = useNavigate();
+
     const saveOrUpdateBook = (e) => {
         e.preventDefault();
         console.log(name+"\n"+address+"\n"+city+"\n"+state+"\n"+zip+"\n"+phone);
@@ -22,9 +24,11 @@ const AddAddressBookComponent = () => {
 
         AddressBookService.addContact(contact).then((response)=>{
             console.log(response.data);
+            navigate("/getAllContacts");
         }).catch(error=>{
             console.log(error);
         });
+
     }
     
 

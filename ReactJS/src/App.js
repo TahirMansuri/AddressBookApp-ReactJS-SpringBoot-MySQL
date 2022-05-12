@@ -13,7 +13,7 @@ function App() {
           <div className='container'>
             <Routes>
               <Route path="/" element={<AddAddressBookComponent />}></Route>
-              <Route path="/view" element={<ViewAddressBookComponent />}></Route>
+              <Route path="/getAllContacts" element={<ViewAddressBookComponent />}></Route>
             </Routes>
           </div>
           
