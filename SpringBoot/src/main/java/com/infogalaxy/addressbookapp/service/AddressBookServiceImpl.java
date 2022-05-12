@@ -22,6 +22,6 @@ public class AddressBookServiceImpl implements IAddressBookService{
 
     @Override
     public List<ContactData> getAllContacts() {
-        return null;
+        return addressBookRepo.findAll();
     }
 }

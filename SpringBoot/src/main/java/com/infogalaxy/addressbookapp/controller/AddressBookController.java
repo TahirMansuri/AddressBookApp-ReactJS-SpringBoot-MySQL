@@ -8,8 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/addressbook")
+@CrossOrigin("*")
 public class AddressBookController {
 
     @Autowired
@@ -20,9 +23,23 @@ public class AddressBookController {
         return "<h1>Welcome to AddressBook App</h1>";
     }
 
+    /***
+     *
+     * @param contactDTO
+     * @return
+     */
     @PostMapping("/addContact")
     public ResponseEntity<ContactData> addContact(@RequestBody  ContactDTO contactDTO) {
 
         return new ResponseEntity<>(addressBookService.addContact(contactDTO), HttpStatus.OK);
+    }
+
+    /***
+     *
+     * @return
+     */
+    @GetMapping("/getAllContacts")
+    public ResponseEntity<List<ContactData>> getAllContacts() {
+        return new ResponseEntity<List<ContactData>>(addressBookService.getAllContacts(),HttpStatus.OK);
     }
 }
