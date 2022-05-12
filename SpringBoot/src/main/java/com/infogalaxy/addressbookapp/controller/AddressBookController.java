@@ -51,4 +51,10 @@ public class AddressBookController {
     public void deleteContactById(@PathVariable int id){
         addressBookService.deleteContactById(id);
     }
+
+    @GetMapping("/getContactById/{id}")
+    public ResponseEntity<ContactData> getContactById(@PathVariable int id) {
+        ContactData contactData = addressBookService.getContactById(id);
+        return new ResponseEntity<ContactData>(contactData,HttpStatus.OK);
+    }
 }
