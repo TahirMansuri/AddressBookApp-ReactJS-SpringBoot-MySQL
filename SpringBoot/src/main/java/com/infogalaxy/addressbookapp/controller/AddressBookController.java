@@ -52,9 +52,25 @@ public class AddressBookController {
         addressBookService.deleteContactById(id);
     }
 
+    /***
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/getContactById/{id}")
     public ResponseEntity<ContactData> getContactById(@PathVariable int id) {
         ContactData contactData = addressBookService.getContactById(id);
         return new ResponseEntity<ContactData>(contactData,HttpStatus.OK);
+    }
+
+    /***
+     *
+     * @param contactDTO
+     * @param id
+     * @return
+     */
+    @PutMapping("/updateContactById/{id}")
+    public ResponseEntity<ContactData> updateContactById(@RequestBody ContactDTO contactDTO,@PathVariable int id) {
+        return new ResponseEntity<ContactData>(addressBookService.updateContactById(contactDTO,id),HttpStatus.OK);
     }
 }

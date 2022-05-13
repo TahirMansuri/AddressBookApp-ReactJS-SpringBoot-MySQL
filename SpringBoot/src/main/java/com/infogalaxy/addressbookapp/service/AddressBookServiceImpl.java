@@ -39,4 +39,11 @@ public class AddressBookServiceImpl implements IAddressBookService{
                 .orElseThrow(() -> new ResourceNotFoundException("Contact with Given ID Not Found"));
         return contactData;
     }
+
+    @Override
+    public ContactData updateContactById(ContactDTO contactDTO, int id) {
+        ContactData contactData = addressBookRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Contact with Given ID Not Found"));
+        contactData.updateContact(contactDTO);
+        return addressBookRepo.save(contactData);
+    }
 }

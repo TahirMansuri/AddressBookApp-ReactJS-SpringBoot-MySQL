@@ -24,6 +24,10 @@ public class ContactData {
     private String phone;
 
     public ContactData(ContactDTO contactDTO) {
+        updateContact(contactDTO);
+    }
+
+    public void updateContact(ContactDTO contactDTO) {
         this.name = contactDTO.getName();
         this.address = contactDTO.getAddress();
         this.city = contactDTO.getCity();

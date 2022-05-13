@@ -15,4 +15,6 @@ public interface IAddressBookService {
 
     ContactData getContactById(int id);
 
+    ContactData updateContactById(ContactDTO contactDTO, int id);
+
 }
