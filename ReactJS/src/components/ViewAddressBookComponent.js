@@ -72,7 +72,7 @@ const ViewAddressBookComponent = () => {
                         <td> {contact.phone} </td>
                         <td>
                                 <img src={delete1} alt="delete" onClick={() => deleteContactById(contact.id)}/>
-                                <Link to={`/${contact.id}`}><img src={update1} alt="edit" /></Link>
+                                <Link to={`/getContactById/${contact.id}`}><img src={update1} alt="edit" /></Link>
                         </td>
                         </tr>        
                     )

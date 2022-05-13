@@ -14,6 +14,7 @@ function App() {
             <Routes>
               <Route path="/" element={<AddAddressBookComponent />}></Route>
               <Route path="/getAllContacts" element={<ViewAddressBookComponent />}></Route>
+              <Route path="/getContactById/:id" element={<AddAddressBookComponent />} ></Route>
             </Routes>
           </div>
           

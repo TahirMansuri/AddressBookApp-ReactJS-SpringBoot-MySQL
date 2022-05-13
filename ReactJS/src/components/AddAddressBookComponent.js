@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import AddressBookService from '../service/AddressBookService'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -22,16 +22,40 @@ const AddAddressBookComponent = () => {
 
         const contact = {name,address,city,state,zip,phone};
 
-        AddressBookService.addContact(contact).then((response)=>{
-            console.log(response.data);
-            navigate("/getAllContacts");
-        }).catch(error=>{
-            console.log(error);
-        });
-
+        if(id){
+            AddressBookService.updateContactById(contact,id).then((response)=>{
+                console.log(response.data);
+                navigate("/getAllContacts");
+            }).catch(error=>{
+                console.log(error);
+            });
+        } else {
+            AddressBookService.addContact(contact).then((response)=>{
+                console.log(response.data);
+                navigate("/getAllContacts");
+            }).catch(error=>{
+                console.log(error);
+            });    
+        }
     }
     
-
+    const {id} = useParams();
+    console.log(id);
+    
+    useEffect(() => {
+      AddressBookService.getContactById(id).then((response)=>{
+        setName(response.data.name);
+        setAddress(response.data.address);
+        setCity(response.data.city);
+        setState(response.data.state);
+        setZip(response.data.zip);
+        setPhone(response.data.phone);
+      }).catch(error=>{
+          console.log(error);
+      });
+    }, [])
+    
+    
   return (
     <div>
         <div class="form-content">
@@ -54,7 +78,7 @@ const AddAddressBookComponent = () => {
                         </p>
 
                     <div class='row-content' >
-                            <select class='form-control' id="city" name="city" onChange={(e) => getCity(e)}>
+                            <select class='form-control' id="city" name="city" onChange={(e) => getCity(e)} value={city}>
                                 <option value="None">Select City</option>
                                 <option value="Shahada">Shahada</option>
                                 <option value="Taloda">Taloda</option>
@@ -62,7 +86,7 @@ const AddAddressBookComponent = () => {
                                 <option value="Dondaicha">Dondaicha</option>
                             </select>
                             <error-output class="fullname-error" for="text"></error-output>
-                            <select class="form-control"  id="state" name="state" onChange={(e) => getState(e)}>
+                            <select class="form-control"  id="state" name="state" onChange={(e) => getState(e)} value={state}>
                                 <option value="None">Select State</option>
                                 <option value="Maharashtra">Maharashtra</option>
                                 <option value="MP">MP</option>
@@ -85,8 +109,8 @@ const AddAddressBookComponent = () => {
                     <error-output class="phone-error" for="text"></error-output>
                     <div class="buttonParent">
                         <div class="submit-reset">
-                            <button className='btn btn-success' onClick={(e) => saveOrUpdateBook(e)}>Submit</button>
-                            <button type="reset" class="button submitButton">Reset</button>
+                            <button className='btn btn-info' onClick={(e) => saveOrUpdateBook(e)}>Submit</button>
+                            <button type="reset" className='btn btn-info' style={{marginLeft: "20px"}}>Reset</button>
                         </div>
                     </div>
                 </div>
